@@ -10,6 +10,13 @@
 <title>Games in Common Results</title>
 </head>
 <body>
-	<div>${games}</div>
+	<h2>Games in common between the following steam accounts: (list steam accounts here)</h2>
+	<div>
+		<ul>
+			<c:forEach items="${games}" var="game">
+				<li>${game}</li>
+			</c:forEach>
+		</ul>
+	</div>
 </body>
 </html>

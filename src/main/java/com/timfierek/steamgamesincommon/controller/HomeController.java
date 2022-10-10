@@ -26,10 +26,16 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/submit")
-	public String results(@RequestParam String steamId, Model model) {
-		LinkedHashSet<Game> games = steamApiService.getUsersGames(steamId);
+	public String results(@RequestParam String steamId1, @RequestParam String steamId2,
+							@RequestParam String steamId3, 
+							@RequestParam String steamId4, 
+							@RequestParam String steamId5, 
+							Model model) {
+		LinkedHashSet<String> games1 = steamApiService.getUsersGames(steamId1);
+		LinkedHashSet<String> games2 = steamApiService.getUsersGames(steamId2);
+		games1.retainAll(games2);
 		
-		model.addAttribute("games", games);
+		model.addAttribute("games", games1);
 		
 		return "results";
 	}
