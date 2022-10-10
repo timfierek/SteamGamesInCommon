@@ -31,7 +31,7 @@ public class SteamApiService {
 	}
 	
 	//http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=XXXX&steamid=76561198328487553&include_appinfo=true
-	public LinkedHashSet<String> getUsersGames(String steamId){
+	public LinkedHashSet<Game> getUsersGames(String steamId){
 		StringBuilder url = new StringBuilder("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=");
 		url.append(apiKey);
 		url.append("&steamid=");
@@ -39,12 +39,8 @@ public class SteamApiService {
 		url.append("&include_appinfo=true");
 		
 		GetOwnedGamesResponse response = restTemplate.getForObject(url.toString(), GetOwnedGamesResponse.class);
-		LinkedHashSet<String> result = new LinkedHashSet<String>();
-		for(Game game : response.getResponse().getGames()) {
-			result.add(game.getName());
-		}
 		
-		return result;
+		return response.getResponse().getGames();
 	}
 	
 	
