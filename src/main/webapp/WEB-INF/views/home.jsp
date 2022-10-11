@@ -24,7 +24,7 @@
 	</form>
 	
 	<h2>...or, select friends from your friends list: </h2>
-	<form method="get" action="/displayfriends">
+	<form method="get" action="/display-friends">
 		<input type="text" name="steamId" required placeholder="Paste your url or id here"/>
 		<input type="submit" value="Get my friends list"/>
 		<p>${errorMessage}</p>

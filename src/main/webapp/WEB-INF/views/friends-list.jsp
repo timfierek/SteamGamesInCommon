@@ -7,9 +7,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>${player.personaName}'s friends</title>
 </head>
 <body>
-
+	<h2>Select the friends you would like to find games in common with:</h2>
+	<form action="/submit" method="post">
+		<c:forEach var="friend" items="${friends}">
+			${friend.personaName} <input type="checkbox" name="steamId[]" value="${friend.steamId}"/><br>
+		</c:forEach>
+		<input type="hidden" name="steamId[]" value="${player.steamId}"/>
+		<input type="submit" value="Find games in common with these friends"/>
+	</form>
 </body>
 </html>

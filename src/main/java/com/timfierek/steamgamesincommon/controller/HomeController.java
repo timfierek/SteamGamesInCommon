@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.timfierek.steamgamesincommon.model.Game;
+import com.timfierek.steamgamesincommon.model.Player;
 import com.timfierek.steamgamesincommon.service.SteamApiService;
 
 
@@ -29,21 +31,29 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/displayfriends")
+	@RequestMapping("/display-friends")
 	public String displayFriends(@RequestParam String steamId, Model model) {
 		String parsedId = parseSteamId(steamId);
 		if(parsedId.equals("error")) {
-			model.addAttribute("errorMessage", "error! url could not be parsed or steam64ID is invalid");
+			model.addAttribute("errorMessage", "Error! Account url or Steam64ID could not be parsed.");
 			return "home";
 		}
-		else {
-			model.addAttribute("player", steamApiService.getPlayer(parsedId));
-			return "friends-list";
+		
+		Player player = steamApiService.getPlayer(parsedId);
+		
+		if(player.getCommunityVisibilityState() == 1) {
+			model.addAttribute("errorMessage", "Error! Account entered is not publicly visible.");
+			return "home";
 		}
+		
+		model.addAttribute("player", player);
+		model.addAttribute("friends", steamApiService.getPlayersFriendsList(parsedId));
+		return "friends-list";
 	}
 	
 	@RequestMapping("/submit")
 	public String results(@RequestParam("steamId[]") List<String> steamId, Model model) {
+		System.out.println(steamId.toString());
 		LinkedHashSet<Game> gamesInCommon = new LinkedHashSet<Game>(steamApiService.getUsersGames(steamId.get(0)));
 		List<String> errorIds = new ArrayList<String>();
 		
