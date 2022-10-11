@@ -1,6 +1,7 @@
 package com.timfierek.steamgamesincommon.model;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

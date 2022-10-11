@@ -1,8 +1,23 @@
 package com.timfierek.steamgamesincommon.model;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Game {
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.getName());
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(o == null || getClass() != o.getClass()) return false;
+		Game that = (Game) o;
+		return this.getName().equals(that.getName());
+	}
+	
 	@Override
 	public String toString() {
 		return "Game [appId=" + appId + ", name=" + name + ", playtimeForever=" + playtimeForever + ", imgIconUrl="

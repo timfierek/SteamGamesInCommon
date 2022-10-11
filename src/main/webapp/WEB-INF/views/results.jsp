@@ -16,6 +16,10 @@
 			<c:forEach items="${games}" var="game">
 				<li>${game}</li>
 			</c:forEach>
+			<h2>Error ids:</h2>
+			<c:forEach items="${errors}" var="error">
+				<li>${error}</li>
+			</c:forEach>
 		</ul>
 	</div>
 </body>

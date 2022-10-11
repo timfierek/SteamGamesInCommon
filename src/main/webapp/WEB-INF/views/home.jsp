@@ -10,7 +10,7 @@
 <title>Games in Common</title>
 </head>
 <body>
-	<h4>Get steam games in common between multiple accounts. (add up to 8)</h4>
+	<h2>Get steam games in common between multiple accounts. (add up to 8)</h2>
 	<form method="post" action="/submit">
 		<input type="text" name="steamId[]" required placeholder="Enter SteamID here"/><br><br>
 		<input type="text" name="steamId[]" placeholder="Enter SteamID here"/><br><br>
@@ -20,7 +20,14 @@
 		<input type="text" name="steamId[]" placeholder="Enter SteamID here"/><br><br>
 		<input type="text" name="steamId[]" placeholder="Enter SteamID here"/><br><br>
 		<input type="text" name="steamId[]" placeholder="Enter SteamID here"/><br><br>
-		<input type="submit" value="test"/>
+		<input type="submit" value="Find games in common"/>
+	</form>
+	
+	<h2>...or, select friends from your friends list: </h2>
+	<form method="get" action="/displayfriends">
+		<input type="text" name="steamId" required placeholder="Paste your url or id here"/>
+		<input type="submit" value="Get my friends list"/>
+		<p>${errorMessage}</p>
 	</form>
 </body>
 </html>
